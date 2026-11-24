@@ -4,1179 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tuong Le — Product-Minded Frontend Engineer</title>
-  <meta name="description" content="Le Minh Tuong — Frontend Engineer with nearly 3 years of experience building production React.js, TypeScript, and React Native web & mobile applications, payment SDKs, and BLE IoT systems." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #F8FAFC;
-      --surface: #FFFFFF;
-      --surface-2: #F1F5F9;
-      --ink: #0F172A;
-      --ink-secondary: #475569;
-      --ink-muted: #64748B;
-      --border: #E2E8F0;
-      --border-strong: #CBD5E1;
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --accent-soft: #EFF6FF;
-      --accent-border: #BFDBFE;
-      --emerald: #059669;
-      --emerald-soft: #ECFDF5;
-      --amber: #D97706;
-      --amber-soft: #FFFBEB;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 14px;
-      --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--font-sans);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-      background-image:
-        linear-gradient(to right, rgba(226, 232, 240, 0.55) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(226, 232, 240, 0.55) 1px, transparent 1px);
-      background-size: 48px 48px;
-      line-height: 1.6;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Top Bar */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(248, 250, 252, 0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-wrap {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 13.5px;
-      color: var(--ink);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .logo-badge {
-      background: var(--ink);
-      color: #fff;
-      padding: 3px 7px;
-      border-radius: 4px;
-      font-size: 11px;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav-links a {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--ink-secondary);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--ink); }
-
-    @media (max-width: 820px) {
-      .nav-links { display: none; }
-      .logo-sub { display: none; }
-    }
-
-    .cmd-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--ink-secondary);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s;
-    }
-
-    .cmd-trigger:hover {
-      border-color: var(--border-strong);
-      color: var(--ink);
-    }
-
-    .kbd {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1px 5px;
-      font-size: 11px;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: var(--font-sans);
-      font-size: 13.5px;
-      font-weight: 500;
-      padding: 9px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-strong);
-      background: var(--surface);
-      color: var(--ink);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.15s;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .btn:hover {
-      background: var(--surface-2);
-      border-color: #94A3B8;
-    }
-
-    .btn-primary {
-      background: var(--ink);
-      color: #FFFFFF;
-      border-color: var(--ink);
-    }
-
-    .btn-primary:hover {
-      background: #1E293B;
-      border-color: #1E293B;
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      color: #FFFFFF;
-      border-color: var(--accent);
-    }
-
-    .btn-accent:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
-    }
-
-    .btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 76px 0 64px;
-      border-bottom: 1px solid var(--border);
-      background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06), transparent 45%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.32fr 0.88fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    @media (max-width: 920px) {
-      .hero-grid { grid-template-columns: 1fr; }
-    }
-
-    .availability {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--emerald);
-      background: var(--emerald-soft);
-      border: 1px solid #A7F3D0;
-      padding: 5px 12px;
-      border-radius: 99px;
-      margin-bottom: 22px;
-    }
-
-    .dot-live {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--emerald);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.45); }
-      70% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
-    }
-
-    .hero h1 {
-      font-size: clamp(32px, 4.4vw, 48px);
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.035em;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 .highlight {
-      color: var(--accent);
-    }
-
-    .hero-lead {
-      font-size: 16px;
-      color: var(--ink-secondary);
-      max-width: 610px;
-      margin-bottom: 28px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    /* Right Hero Telemetry Card */
-    .telemetry-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-
-    .telemetry-top {
-      padding: 12px 16px;
-      background: var(--surface-2);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--ink-secondary);
-    }
-
-    .window-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .window-dots span {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #CBD5E1;
-    }
-
-    .telemetry-body {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .stat-row:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .stat-key {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--ink-muted);
-      white-space: nowrap;
-    }
-
-    .stat-val {
-      font-weight: 600;
-      font-size: 13.5px;
-      color: var(--ink);
-      text-align: right;
-    }
-
-    /* Section Architecture */
-    section {
-      padding: 72px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 34px;
-    }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .section-title {
-      font-size: 27px;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-    }
-
-    .section-desc {
-      font-size: 15px;
-      color: var(--ink-secondary);
-      max-width: 630px;
-      margin-top: 6px;
-    }
-
-    /* Interactive Engineering Lab */
-    .lab-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
-    }
-
-    .lab-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .col-7 { grid-column: span 7; }
-    .col-5 { grid-column: span 5; }
-    .col-12 { grid-column: span 12; }
-
-    @media (max-width: 920px) {
-      .col-7, .col-5, .col-12 { grid-column: span 12; }
-    }
-
-    .lab-header {
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface-2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .lab-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .pill-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid var(--accent-border);
-    }
-
-    .lab-content {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    /* Dual Device Sync UI */
-    .device-arena {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 14px;
-      background: var(--bg);
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-    }
-
-    @media (max-width: 580px) {
-      .device-arena { grid-template-columns: 1fr; }
-    }
-
-    .web-frame, .phone-frame {
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm);
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .phone-frame {
-      border-radius: 12px;
-      border-width: 2px;
-      border-color: var(--ink);
-    }
-
-    .frame-bar {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-muted);
-      display: flex;
-      justify-content: space-between;
-      padding-bottom: 7px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .student-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      font-size: 12.5px;
-      background: var(--bg);
-    }
-
-    .badge-state {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: var(--amber-soft);
-      color: var(--amber);
-      font-weight: 600;
-    }
-
-    .badge-state.done {
-      background: var(--emerald-soft);
-      color: var(--emerald);
-    }
-
-    .mini-kpi-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .mini-kpi {
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 7px 8px;
-      background: var(--bg);
-    }
-
-    .mini-kpi span {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      color: var(--ink-muted);
-    }
-
-    .mini-kpi strong {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .push-banner {
-      background: var(--surface-2);
-      border-left: 3px solid var(--accent);
-      padding: 9px 10px;
-      border-radius: 4px;
-      font-size: 11.5px;
-      transition: all 0.2s ease;
-    }
-
-    .push-banner.verified {
-      background: var(--emerald-soft);
-      border-left-color: var(--emerald);
-    }
-
-    /* Terminal Console */
-    .terminal {
-      background: #0F172A;
-      color: #E2E8F0;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      padding: 13px 14px;
-      border-radius: var(--radius-sm);
-      height: 162px;
-      overflow-y: auto;
-      line-height: 1.55;
-    }
-
-    .t-dim { color: #64748B; }
-    .t-blue { color: #38BDF8; }
-    .t-green { color: #34D399; }
-    .t-amber { color: #FBBF24; }
-
-    /* Payment Gateway Sandbox */
-    .payment-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    @media (max-width: 640px) {
-      .payment-bar { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .pay-method {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      cursor: pointer;
-      background: var(--surface);
-      transition: all 0.15s;
-    }
-
-    .pay-method:hover { border-color: var(--accent); }
-    .pay-method.active {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Filter Tabs & Case Studies */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--ink-secondary);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--border-strong);
-      color: var(--ink);
-    }
-
-    .filter-btn.active {
-      background: var(--ink);
-      color: #fff;
-      border-color: var(--ink);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 860px) {
-      .projects-grid { grid-template-columns: 1fr; }
-    }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-xs);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-strong);
-    }
-
-    /* Project Thumbnail Frame */
-    .project-thumb {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      background: var(--surface-2);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .project-thumb.zoomable {
-      cursor: zoom-in;
-    }
-
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.25s ease;
-    }
-
-    .project-card:hover .project-thumb.zoomable img {
-      transform: scale(1.02);
-    }
-
-    .thumb-zoom-hint {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      color: #F8FAFC;
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(4px);
-      padding: 3px 8px;
-      border-radius: 4px;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-      pointer-events: none;
-    }
-
-    .project-thumb.zoomable:hover .thumb-zoom-hint {
-      opacity: 1;
-    }
-
-    /* Tier 2: Architecture & Internal Systems */
-    .arch-tier {
-      margin-top: 34px;
-    }
-
-    .arch-tier-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed var(--border-strong);
-    }
-
-    .arch-tier-title {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--ink-secondary);
-    }
-
-    .arch-tier-note {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--ink-muted);
-    }
-
-    .arch-diagram-banner {
-      background:
-        linear-gradient(to right, rgba(226, 232, 240, 0.55) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(226, 232, 240, 0.55) 1px, transparent 1px),
-        #F8FAFC;
-      background-size: 20px 20px;
-      border-bottom: 1px solid var(--border);
-      padding: 14px 18px;
-    }
-
-    .arch-diagram-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-muted);
-      margin-bottom: 8px;
-      letter-spacing: 0.04em;
-    }
-
-    .arch-diagram-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .project-body {
-      padding: 22px 24px 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--ink-muted);
-      margin-bottom: 8px;
-    }
-
-    .project-title {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .project-summary {
-      font-size: 13.8px;
-      color: var(--ink-secondary);
-    }
-
-    .arch-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      font-size: 13px;
-      color: var(--ink-secondary);
-    }
-
-    .arch-box strong {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--ink-muted);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .card-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: var(--surface-2);
-      color: var(--ink-secondary);
-      border: 1px solid var(--border);
-    }
-
-    .card-status-bar {
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--ink-muted);
-    }
-
-    .card-live-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .card-live-link:hover {
-      color: var(--accent-hover);
-      text-decoration: underline;
-    }
-
-    /* Experience & Education Section */
-    .exp-grid {
-      display: grid;
-      grid-template-columns: 1.55fr 0.85fr;
-      gap: 22px;
-      align-items: start;
-    }
-
-    @media (max-width: 880px) {
-      .exp-grid { grid-template-columns: 1fr; }
-    }
-
-    .exp-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding-bottom: 16px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .exp-role {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .exp-company {
-      font-size: 14px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .exp-period {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--ink-muted);
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 4px 9px;
-      border-radius: 4px;
-    }
-
-    .exp-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--ink-secondary);
-    }
-
-    .exp-list li {
-      position: relative;
-      padding-left: 16px;
-    }
-
-    .exp-list li::before {
-      content: "›";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      font-weight: 700;
-    }
-
-    .edu-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .edu-item {
-      padding-bottom: 14px;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .edu-item:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .edu-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .edu-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .edu-sub {
-      font-size: 13px;
-      color: var(--ink-secondary);
-      margin-top: 2px;
-    }
-
-    /* Skills Matrix */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    @media (max-width: 900px) {
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 540px) {
-      .skills-grid { grid-template-columns: 1fr; }
-    }
-
-    .skill-group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-    }
-
-    .skill-group h3 {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .skill-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 13.5px;
-      color: var(--ink-secondary);
-    }
-
-    .skill-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .skill-level {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      color: var(--ink-muted);
-    }
-
-    /* Modals (Command Palette & Image Lightbox) */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.55);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 12vh;
-      z-index: 100;
-    }
-
-    .modal-backdrop.open { display: flex; }
-
-    .cmd-modal {
-      width: 100%;
-      max-width: 540px;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      margin: 0 16px;
-    }
-
-    .cmd-input {
-      width: 100%;
-      padding: 14px 16px;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      font-family: var(--font-sans);
-      font-size: 14px;
-      outline: none;
-    }
-
-    .cmd-list {
-      padding: 8px;
-      max-height: 340px;
-      overflow-y: auto;
-    }
-
-    .cmd-item {
-      padding: 10px 12px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13.5px;
-      cursor: pointer;
-      color: var(--ink);
-      text-decoration: none;
-    }
-
-    .cmd-item:hover {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    /* Lightbox */
-    .lightbox-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.82);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 110;
-    }
-
-    .lightbox-backdrop.open { display: flex; }
-
-    .lightbox-card {
-      max-width: 1040px;
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
-    }
-
-    .lightbox-head {
-      padding: 12px 16px;
-      background: var(--surface-2);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--ink);
-    }
-
-    .lightbox-close {
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      cursor: pointer;
-      color: var(--ink);
-    }
-
-    .lightbox-body img {
-      width: 100%;
-      max-height: 78vh;
-      object-fit: contain;
-      display: block;
-      background: #0F172A;
-    }
-
-    /* Footer */
-    footer {
-      padding: 52px 0;
-      background: var(--surface);
-    }
-
-    .footer-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-  </style>
+  <meta name="description" content="Le Minh Tuong — Frontend Engineer building production React.js, TypeScript, and React Native web & mobile applications, payment SDKs, and BLE IoT systems." />
+  <meta name="theme-color" content="#F8FAFC" />
+  <link rel="canonical" href="https://minhtuongle.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://minhtuongle.github.io/" />
+  <meta property="og:title" content="Tuong Le — Product-Minded Frontend Engineer" />
+  <meta property="og:description" content="Frontend architecture across multi-platform web & mobile apps, payment SDKs, and real-time BLE IoT systems." />
+  <meta property="og:image" content="https://minhtuongle.github.io/assets/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tuong Le — Product-Minded Frontend Engineer" />
+  <meta name="twitter:description" content="Frontend architecture across multi-platform web & mobile apps, payment SDKs, and real-time BLE IoT systems." />
+  <meta name="twitter:image" content="https://minhtuongle.github.io/assets/og-cover.png" />
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles/tokens.css" />
+  <link rel="stylesheet" href="./src/styles/layout.css" />
+  <link rel="stylesheet" href="./src/styles/components.css" />
+  <link rel="stylesheet" href="./src/styles/lab.css" />
+  <script type="module" src="./src/js/main.js"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Sticky Header -->
-  <header>
+  <header class="site-header">
     <div class="container nav-wrap">
       <a href="#" class="logo">
-        <span class="logo-badge">TL</span>
+        <span class="logo-badge">T<span class="logo-badge-accent">L</span></span>
         <span>TUONG LE <span class="logo-sub">// FRONTEND ENGINEER</span></span>
       </a>
 
@@ -1187,26 +46,58 @@
           <a href="#experience">Experience</a>
           <a href="#stack">Tech Stack</a>
         </div>
-        <button id="openCmd" class="cmd-trigger" type="button" title="Open Quick Navigation (Ctrl+K)">
-          <span>Quick Actions</span>
-          <span class="kbd">Ctrl K</span>
-        </button>
+
+        <div class="nav-actions">
+          <button id="openCmd" class="cmd-trigger" type="button" title="Open Command Palette (Ctrl+K / Cmd+K)">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <span class="cmd-trigger-label">Quick Actions</span>
+            <span id="cmdShortcutLabel" class="kbd">Ctrl K</span>
+          </button>
+
+          <button
+            id="mobileNavToggle"
+            class="mobile-nav-toggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobileNavPanel"
+          >
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
+        </div>
       </nav>
     </div>
+
+    <!-- Collapsible Mobile Navigation -->
+    <div id="mobileNavPanel" class="mobile-nav-panel">
+      <div class="mobile-nav-links">
+        <a href="#lab"><span>Interactive Engineering Lab</span><span class="mobile-nav-index">01</span></a>
+        <a href="#work"><span>Selected Case Studies</span><span class="mobile-nav-index">02</span></a>
+        <a href="#experience"><span>Experience &amp; Background</span><span class="mobile-nav-index">03</span></a>
+        <a href="#stack"><span>Technical Capabilities</span><span class="mobile-nav-index">04</span></a>
+      </div>
+    </div>
+
+    <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="availability">
-            <span class="dot-live"></span>
-            <span>Open to Product-Focused Frontend Opportunities</span>
+          <div class="identity-badge">
+            <span class="identity-dot" aria-hidden="true"></span>
+            <span>Product-Minded Frontend Engineer · Ho Chi Minh City</span>
           </div>
 
           <h1>
-            Engineering <span class="highlight">Web & Mobile</span> products from workflow to production.
+            Engineering <span class="highlight">Web &amp; Mobile</span> products from workflow to production.
           </h1>
 
           <p class="hero-lead">
@@ -1216,15 +107,21 @@
           <div class="hero-actions">
             <a href="#work" class="btn btn-primary">Explore Case Studies</a>
             <a href="#lab" class="btn">Test Live Sandboxes</a>
-            <a href="./CV%20L%C3%AA%20Minh%20T%C6%B0%E1%BB%9Dng%20-%20FrontEnd%20Developer.pdf" target="_blank" rel="noopener noreferrer" class="btn">Resume / CV ↗</a>
-            <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="btn">GitHub ↗</a>
+            <a href="./assets/docs/Le-Minh-Tuong-Frontend-CV.pdf" target="_blank" rel="noopener noreferrer" class="btn">
+              <span>Resume PDF</span>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </a>
+            <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="btn">
+              <span>GitHub</span>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </a>
           </div>
         </div>
 
         <!-- Engineering Telemetry Card -->
         <aside class="telemetry-card" aria-label="Profile Telemetry">
           <div class="telemetry-top">
-            <div class="window-dots">
+            <div class="window-dots" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
             <span>PROFILE_TELEMETRY.JSON</span>
@@ -1232,7 +129,7 @@
           <div class="telemetry-body">
             <div class="stat-row">
               <span class="stat-key">EXPERIENCE</span>
-              <span class="stat-val">~3 Years (10/2023 – Present)</span>
+              <span class="stat-val tabular-nums">~3 Years (10/2023 – Present)</span>
             </div>
             <div class="stat-row">
               <span class="stat-key">CORE STACK</span>
@@ -1240,7 +137,7 @@
             </div>
             <div class="stat-row">
               <span class="stat-key">PRODUCTION APPS</span>
-              <span class="stat-val">12+ Delivered • 3 Store Releases</span>
+              <span class="stat-val tabular-nums">12+ Delivered • 3 Store Releases</span>
             </div>
             <div class="stat-row">
               <span class="stat-key">DOMAIN DEPTH</span>
@@ -1248,36 +145,49 @@
             </div>
             <div class="stat-row">
               <span class="stat-key">ENGLISH</span>
-              <span class="stat-val">TOEIC 805 / 990</span>
+              <span class="stat-val tabular-nums">TOEIC 805 / 990</span>
             </div>
+          </div>
+          <div class="telemetry-footer">
+            <span class="telemetry-loc">Thu Duc City, HCMC</span>
+            <button type="button" class="card-inspect-btn" data-copy-email>
+              <span data-copy-label>Copy Email</span>
+            </button>
           </div>
         </aside>
       </div>
     </section>
 
     <!-- Section 01: Interactive Engineering Lab -->
-    <section id="lab">
+    <section id="lab" class="page-section">
       <div class="container">
         <div class="section-head">
           <div>
             <span class="eyebrow">01 // Interactive Engineering Lab</span>
             <h2 class="section-title">Proof of Work — Live Architectural Sandboxes</h2>
             <p class="section-desc">
-              Interact directly with simplified state-machines modeled after real production workflows shipped across multi-platform web, BLE hardware, and native payment SDKs.
+              Client-side state-machine simulations modeled after real production workflows shipped across multi-platform web, BLE hardware, and native payment SDKs.
             </p>
           </div>
+          <span class="sim-badge" title="Client-side interactive simulations">
+            <span class="sim-badge-dot" aria-hidden="true"></span>
+            <span>Client-Side Simulations</span>
+          </span>
         </div>
 
         <div class="lab-grid">
           <!-- Sandbox 1: Multi-Platform Sync (Kindie) -->
           <div class="lab-card col-7">
             <div class="lab-header">
-              <span class="lab-title">KINDIE // Teacher Mobile → Admin & Parent Sync</span>
-              <span class="pill-tag">React + Expo / PWA</span>
+              <span class="lab-title">KINDIE // Teacher Mobile → Admin &amp; Parent Sync</span>
+              <div class="lab-header-right">
+                <span class="pill-tag">React + Expo / PWA</span>
+                <button type="button" class="lab-case-link" data-open-case="kindie">UI &amp; Architecture →</button>
+              </div>
             </div>
             <div class="lab-content">
-              <p style="font-size: 13.5px; color: var(--ink-secondary);">
-                Simulating the real Kindie In/Out attendance flow: a teacher marks student check-out on mobile and triggers instant synchronization across the School Admin overview and Parent notifications.
+              <p class="lab-desc">
+                Simulating the Kindie In/Out attendance gate: tap any student on the Teacher App to dispatch real-time state updates to School Admin KPIs and Parent push notifications.
               </p>
 
               <div class="device-arena">
@@ -1287,17 +197,36 @@
                       <span>TEACHER APP • OUT</span>
                       <span>Nursery 1</span>
                     </div>
-                    <div class="student-item" style="margin-top: 8px;">
-                      <div>
-                        <strong style="display:block; font-size: 12.5px;">Smith Bailey Emma</strong>
-                        <span style="font-size: 11px; color: var(--ink-muted);">Attendance Out • 16:30</span>
-                      </div>
-                      <span id="mobileBadge" class="badge-state">IN CLASS</span>
+                    <div class="student-list">
+                      <button type="button" class="student-item" data-student-id="emma" data-student-name="Smith Bailey Emma" aria-pressed="false">
+                        <span>
+                          <span class="student-name">Smith Bailey Emma</span>
+                          <span class="student-meta">Gate Out • 16:30</span>
+                        </span>
+                        <span class="badge-state">IN CLASS</span>
+                      </button>
+
+                      <button type="button" class="student-item" data-student-id="liam" data-student-name="Liam Nguyen" aria-pressed="false">
+                        <span>
+                          <span class="student-name">Liam Nguyen</span>
+                          <span class="student-meta">Gate Out • 16:35</span>
+                        </span>
+                        <span class="badge-state">IN CLASS</span>
+                      </button>
+
+                      <button type="button" class="student-item" data-student-id="chloe" data-student-name="Chloe Tran" aria-pressed="false">
+                        <span>
+                          <span class="student-name">Chloe Tran</span>
+                          <span class="student-meta">Gate Out • 16:40</span>
+                        </span>
+                        <span class="badge-state">IN CLASS</span>
+                      </button>
                     </div>
                   </div>
-                  <button id="syncBtn" type="button" class="btn btn-primary" style="width: 100%; font-size: 12px; padding: 8px 12px;">
-                    Mark Picked Up & Notify
-                  </button>
+                  <div class="frame-foot-actions">
+                    <span class="frame-hint">Tap student to toggle</span>
+                    <button id="kindieResetBtn" type="button" class="btn btn-sm" disabled>Reset</button>
+                  </div>
                 </div>
 
                 <div class="web-frame">
@@ -1306,24 +235,24 @@
                       <span>KINDIE ADMIN • OVERVIEW</span>
                       <span>Default Branch</span>
                     </div>
-                    <div class="mini-kpi-row" style="margin-top: 8px;">
+                    <div id="kindieKpis" class="mini-kpi-row">
                       <div class="mini-kpi">
                         <span>PRESENT</span>
-                        <strong id="kpiPresent">15</strong>
+                        <strong id="kpiPresent" class="tabular-nums">15</strong>
                       </div>
                       <div class="mini-kpi">
                         <span>PICKED UP</span>
-                        <strong id="kpiPicked">0</strong>
+                        <strong id="kpiPicked" class="tabular-nums">0</strong>
                       </div>
                       <div class="mini-kpi">
-                        <span>MARKED</span>
-                        <strong id="kpiMarked">5/6</strong>
+                        <span>PICKUP QUEUE</span>
+                        <strong id="kpiQueue" class="tabular-nums">0/3</strong>
                       </div>
                     </div>
                   </div>
-                  <div id="phonePush" class="push-banner">
-                    <strong style="display:block; margin-bottom: 2px;">Parent Push Event</strong>
-                    <span id="phoneMsg" style="color: var(--ink-secondary);">Awaiting afternoon check-out trigger...</span>
+                  <div id="phonePush" class="push-banner" aria-live="polite">
+                    <strong>Parent Push Event</strong>
+                    <span id="phoneMsg">Select any student on the Teacher App to dispatch real-time sync.</span>
                   </div>
                 </div>
               </div>
@@ -1334,18 +263,37 @@
           <div class="lab-card col-5">
             <div class="lab-header">
               <span class="lab-title">KODO // BLE Diffuser Command Layer</span>
-              <span class="pill-tag">Bluetooth LE</span>
+              <div class="lab-header-right">
+                <span class="pill-tag">Bluetooth LE</span>
+                <button type="button" class="lab-case-link" data-open-case="kodo">UI &amp; Architecture →</button>
+              </div>
             </div>
             <div class="lab-content">
-              <p style="font-size: 13.5px; color: var(--ink-secondary);">
-                Peripheral discovery, 4-digit PIN authentication, and work/pause spray cycle payload writes modeled after the Kodo smart diffuser protocol.
+              <p class="lab-desc">
+                Peripheral discovery, 4-digit PIN authentication, disconnect auto-recovery, and configurable work/pause spray payloads modeled after the Kodo smart diffuser protocol.
               </p>
 
-              <div style="display: flex; gap: 7px; flex-wrap: wrap;">
-                <button id="bleScan" type="button" class="btn" style="font-size: 12px; padding: 6px 10px;">1. Scan BLE</button>
-                <button id="bleAuth" type="button" class="btn" style="font-size: 12px; padding: 6px 10px;" disabled>2. PIN Auth</button>
-                <button id="bleSend" type="button" class="btn btn-accent" style="font-size: 12px; padding: 6px 10px;" disabled>3. Write Config</button>
-                <button id="bleReset" type="button" class="btn" style="font-size: 11.5px; padding: 6px 9px; margin-left: auto;" title="Reset BLE session">Reset</button>
+              <div class="ble-controls">
+                <button id="bleScan" type="button" class="btn btn-sm">1. Scan BLE</button>
+                <button id="bleAuth" type="button" class="btn btn-sm" disabled>2. PIN Auth</button>
+                <button id="bleSend" type="button" class="btn btn-accent btn-sm" disabled>3. Write Config</button>
+                <button id="bleDrop" type="button" class="btn btn-sm" disabled title="Simulate BLE link drop & auto-reconnect">Drop Link</button>
+                <button id="bleReset" type="button" class="btn btn-sm ble-reset-btn" title="Reset BLE session">Reset</button>
+              </div>
+
+              <div class="ble-config-bar">
+                <div class="ble-segment-group" role="group" aria-label="Spray intensity">
+                  <span class="ble-segment-label">INTENSITY</span>
+                  <button type="button" class="ble-seg-btn" data-ble-intensity="LOW" aria-pressed="false">LOW</button>
+                  <button type="button" class="ble-seg-btn active" data-ble-intensity="MED" aria-pressed="true">MED</button>
+                  <button type="button" class="ble-seg-btn" data-ble-intensity="HIGH" aria-pressed="false">HIGH</button>
+                </div>
+
+                <div class="oil-meter" title="Diffuser oil telemetry">
+                  <span>OIL</span>
+                  <span class="oil-track"><span id="bleOilFill" class="oil-fill"></span></span>
+                  <span id="bleOilLabel" class="tabular-nums">165/200ml</span>
+                </div>
               </div>
 
               <div id="bleLog" class="terminal" aria-live="polite">
@@ -1358,25 +306,39 @@
           <div class="lab-card col-12">
             <div class="lab-header">
               <span class="lab-title">BAMI // Unified Multi-Gateway Checkout Flow</span>
-              <span class="pill-tag">Stripe • Apple Pay • Google Pay • ANZ</span>
+              <div class="lab-header-right">
+                <span class="pill-tag">Stripe • Apple Pay • Google Pay • ANZ</span>
+                <button type="button" class="lab-case-link" data-open-case="bami">UI &amp; Architecture →</button>
+              </div>
             </div>
             <div class="lab-content">
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                <p style="font-size: 13.5px; color: var(--ink-secondary); max-width: 700px;">
-                  Click & Collect order (<strong style="color: var(--ink);">Bami Roll + Sugarcane Frost</strong>). Switch native payment providers to inspect unified SDK tokenization and order confirmation handling.
+              <div class="pay-top-row">
+                <p class="pay-order-summary">
+                  Click &amp; Collect order (<strong>Bami Roll + Sugarcane Frost</strong>). Switch payment providers or toggle failure mode to inspect unified SDK tokenization and centralized fallback recovery.
                 </p>
-                <button id="runPayBtn" type="button" class="btn btn-primary" style="font-size: 12.5px;">Simulate Checkout ($13.00 AUD)</button>
+                <div class="pay-actions-group">
+                  <label class="sim-toggle">
+                    <input id="payFailToggle" type="checkbox" />
+                    <span>Simulate Failure</span>
+                  </label>
+                  <button id="runPayBtn" type="button" class="btn btn-primary btn-sm">Simulate Checkout ($13.00 AUD)</button>
+                </div>
               </div>
 
-              <div class="payment-bar" id="payMethods">
-                <button type="button" class="pay-method active" data-provider="Apple Pay (Wallet)">Apple Pay</button>
-                <button type="button" class="pay-method" data-provider="Google Pay API">Google Pay</button>
-                <button type="button" class="pay-method" data-provider="Stripe PaymentSheet">Stripe Card</button>
-                <button type="button" class="pay-method" data-provider="ANZ Payment Gateway">ANZ Gateway</button>
+              <div class="payment-bar" id="payMethods" role="group" aria-label="Payment providers">
+                <button type="button" class="pay-method active" data-provider="Apple Pay (Wallet)" aria-pressed="true">Apple Pay</button>
+                <button type="button" class="pay-method" data-provider="Google Pay API" aria-pressed="false">Google Pay</button>
+                <button type="button" class="pay-method" data-provider="Stripe PaymentSheet" aria-pressed="false">Stripe Card</button>
+                <button type="button" class="pay-method" data-provider="ANZ Payment Gateway" aria-pressed="false">ANZ Gateway</button>
               </div>
 
-              <div id="payOutput" style="font-family: var(--font-mono); font-size: 12px; background: var(--surface-2); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); color: var(--ink-secondary);">
-                Selected Provider: <strong>Apple Pay (Wallet)</strong> — Ready to tokenize payload.
+              <div class="pay-bottom-grid">
+                <div id="payOutput" class="pay-output" aria-live="polite"></div>
+                <div class="pay-pipeline" aria-label="Checkout stages">
+                  <span id="payStepToken" class="pay-step">1. Tokenize</span>
+                  <span id="payStepAuth" class="pay-step">2. Authorize</span>
+                  <span id="payStepQueue" class="pay-step">3. Order Queue</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1385,348 +347,57 @@
     </section>
 
     <!-- Section 02: Selected Case Studies -->
-    <section id="work">
+    <section id="work" class="page-section">
       <div class="container">
         <div class="section-head">
           <div>
             <span class="eyebrow">02 // Selected Case Studies</span>
-            <h2 class="section-title">Production Architecture & Product Ownership</h2>
+            <h2 class="section-title">Production Architecture &amp; Product Ownership</h2>
             <p class="section-desc">
-              Filter by engineering domain to inspect real UI captures, workflow research, architecture ownership, and store delivery outcomes.
+              Filter by domain or open any architecture brief to inspect workflow research, engineering decisions, and production delivery outcomes.
             </p>
           </div>
 
-          <div class="filter-bar" id="projectFilters">
-            <button type="button" class="filter-btn active" data-filter="all">All (6)</button>
-            <button type="button" class="filter-btn" data-filter="mobile">Mobile & Store</button>
-            <button type="button" class="filter-btn" data-filter="realtime">Real-time & IoT</button>
-            <button type="button" class="filter-btn" data-filter="web">Web Platforms</button>
+          <div class="filter-bar" id="projectFilters" role="group" aria-label="Filter case studies by domain">
+            <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
+              <span>All</span><span class="filter-count">6</span>
+            </button>
+            <button type="button" class="filter-btn" data-filter="mobile" aria-pressed="false">
+              <span>Mobile &amp; Store</span><span class="filter-count">3</span>
+            </button>
+            <button type="button" class="filter-btn" data-filter="realtime" aria-pressed="false">
+              <span>Real-time &amp; IoT</span><span class="filter-count">2</span>
+            </button>
+            <button type="button" class="filter-btn" data-filter="web" aria-pressed="false">
+              <span>Web Platforms</span><span class="filter-count">4</span>
+            </button>
           </div>
         </div>
 
-        <div class="projects-grid" id="projectsContainer">
-          <!-- Project 1: Kindie -->
-          <article class="project-card" data-category="mobile web">
-            <div class="project-thumb zoomable" data-lightbox-src="./assets/thumbnails/kindie.webp" data-lightbox-title="Kindie — Multi-Branch Admin Web & Teacher Mobile App">
-              <img src="./assets/thumbnails/kindie.webp" alt="Kindie Admin Web dashboard and Teacher mobile app screens" loading="lazy" />
-              <span class="thumb-zoom-hint">Click to inspect ↗</span>
-            </div>
-            <div class="project-body">
-              <div>
-                <div class="project-meta">
-                  <span>EDTECH ECOSYSTEM • ZINISOFT</span>
-                  <span>WEB + iOS + ANDROID</span>
-                </div>
-                <h3 class="project-title">Kindie — Kindergarten Management Platform</h3>
-                <p class="project-summary">
-                  Owned end-to-end frontend architecture across both the multi-branch School Admin Web portal and cross-platform Teacher/Parent mobile app, shaped by researching real school workflows.
-                </p>
-              </div>
-              <div class="arch-box">
-                <strong>Engineering & UX Highlight</strong>
-                Delivered consistent web + mobile flows for In/Out attendance gates, daily routines, meal/medical reports, bus tracking, and tuition overview; managed App Store & Google Play releases.
-              </div>
-              <div class="card-footer">
-                <div class="tag-row">
-                  <span class="tag">React.js</span>
-                  <span class="tag">TypeScript</span>
-                  <span class="tag">React Native</span>
-                  <span class="tag">Expo</span>
-                  <span class="tag">PWA</span>
-                </div>
-                <div class="card-status-bar">
-                  <span>Shipped on Web, iOS & Android</span>
-                  <span>Company Product</span>
-                </div>
-              </div>
-            </div>
-          </article>
+        <!-- Tier 1: Featured Visual Case Studies (rendered from src/js/data/portfolio.js) -->
+        <div class="projects-grid" id="projectsContainer"></div>
 
-          <!-- Project 2: BAMI -->
-          <article class="project-card" data-category="mobile">
-            <div class="project-thumb zoomable" data-lightbox-src="./assets/thumbnails/bami.webp" data-lightbox-title="Bami Vietnamese — Food Ordering & Multi-Gateway Payments">
-              <img src="./assets/thumbnails/bami.webp" alt="Bami Vietnamese mobile food ordering and pickup tracking screens" loading="lazy" />
-              <span class="thumb-zoom-hint">Click to inspect ↗</span>
-            </div>
-            <div class="project-body">
-              <div>
-                <div class="project-meta">
-                  <span>F&B COMMERCE • ZINISOFT</span>
-                  <span>10K+ DOWNLOADS • MOBILE</span>
-                </div>
-                <h3 class="project-title">BAMI — Food Ordering & Multi-Gateway Payments</h3>
-                <p class="project-summary">
-                  Maintained and extended a production Australian food-ordering mobile app supporting Click & Collect, Delivery, Catering orders, dish customization, and real-time order status tracking.
-                </p>
-              </div>
-              <div class="arch-box">
-                <strong>Engineering & UX Highlight</strong>
-                Integrated Stripe, Apple Pay, Google Pay, and ANZ Payment Gateway with centralized error recovery, delivery-radius validation, and App Store / Google Play release management.
-              </div>
-              <div class="card-footer">
-                <div class="tag-row">
-                  <span class="tag">React Native</span>
-                  <span class="tag">Stripe SDK</span>
-                  <span class="tag">Apple Pay</span>
-                  <span class="tag">Google Pay</span>
-                  <span class="tag">ANZ Gateway</span>
-                </div>
-                <div class="card-status-bar">
-                  <span>Shipped on iOS & Android</span>
-                  <span>Company Product</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3: Kodo Fragrances -->
-          <article class="project-card" data-category="mobile realtime">
-            <div class="project-thumb zoomable" data-lightbox-src="./assets/thumbnails/kodo.webp" data-lightbox-title="Kodo Fragrances — Smart Diffuser BLE IoT Control">
-              <img src="./assets/thumbnails/kodo.webp" alt="Kodo Fragrances Bluetooth Low Energy scanner, device configuration, and PIN pairing screens" loading="lazy" />
-              <span class="thumb-zoom-hint">Click to inspect ↗</span>
-            </div>
-            <div class="project-body">
-              <div>
-                <div class="project-meta">
-                  <span>HARDWARE / IOT • ZINISOFT</span>
-                  <span>BLE • iOS & ANDROID</span>
-                </div>
-                <h3 class="project-title">Kodo Fragrances — Smart Diffuser BLE Control</h3>
-                <p class="project-summary">
-                  Built the Bluetooth Low Energy communication layer enabling mobile devices to discover, authenticate, and control smart fragrance diffusers for home and commercial spaces in real time.
-                </p>
-              </div>
-              <div class="arch-box">
-                <strong>Engineering & UX Highlight</strong>
-                Implemented live BLE scanning, 4-digit PIN handshake auth, work/pause spray cycle configuration, oil capacity telemetry (ml), and production store releases on iOS & Android.
-              </div>
-              <div class="card-footer">
-                <div class="tag-row">
-                  <span class="tag">React Native</span>
-                  <span class="tag">Expo</span>
-                  <span class="tag">Bluetooth Low Energy</span>
-                  <span class="tag">App Store / Play Store</span>
-                </div>
-                <div class="card-status-bar">
-                  <span>Shipped on iOS & Android</span>
-                  <span>Company Product</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 4: LexiNote (ONLY Project with Live Link) -->
-          <article class="project-card" data-category="web">
-            <div class="project-thumb zoomable" data-lightbox-src="./assets/thumbnails/lexinote.webp" data-lightbox-title="LexiNote — Full-Stack English Vocabulary Platform">
-              <img src="./assets/thumbnails/lexinote.webp" alt="LexiNote vocabulary learning dashboard with study streak, flashcards, AI Extract, and word matching" loading="lazy" />
-              <span class="thumb-zoom-hint">Click to inspect ↗</span>
-            </div>
-            <div class="project-body">
-              <div>
-                <div class="project-meta">
-                  <span>PERSONAL PROJECT • 03/2026 – PRESENT</span>
-                  <span>FULL-STACK OWNERSHIP</span>
-                </div>
-                <h3 class="project-title">LexiNote — English Vocabulary Platform</h3>
-                <p class="project-summary">
-                  Independently built and deployed an English vocabulary app featuring flashcard review, manual word-matching games, AI vocabulary extraction, curated decks (IELTS, TOEIC, IT Tech), and CSV/Excel bulk import & export.
-                </p>
-              </div>
-              <div class="arch-box">
-                <strong>Engineering & UX Highlight</strong>
-                Owned both the Vite + React + TypeScript frontend and Nest.js + PostgreSQL backend from scratch, adding auth, audio pronunciation, daily streak tracking, and accuracy analytics on free-tier hosting.
-              </div>
-              <div class="card-footer">
-                <div class="tag-row">
-                  <span class="tag">Vite + React</span>
-                  <span class="tag">TypeScript</span>
-                  <span class="tag">Redux Toolkit</span>
-                  <span class="tag">Tailwind CSS</span>
-                  <span class="tag">Nest.js</span>
-                  <span class="tag">PostgreSQL</span>
-                </div>
-                <div class="card-status-bar">
-                  <span>Personal Production App</span>
-                  <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="card-live-link">Live Demo ↗</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Tier 2: Additional Systems & Architecture (No Public Screenshots) -->
+        <!-- Tier 2: Additional Systems & Architecture (rendered from src/js/data/portfolio.js) -->
         <div class="arch-tier" id="archSystemsTier">
           <div class="arch-tier-head">
-            <span class="arch-tier-title">Additional Systems & Architecture</span>
+            <span class="arch-tier-title">Additional Systems &amp; Architecture</span>
             <span class="arch-tier-note">Internal / offline deployments — documented via system data-flow</span>
           </div>
-
-          <div class="projects-grid" id="archSystemsGrid">
-            <!-- Project 5: Coco QMS & Yersin Portal -->
-            <article class="project-card" data-category="web realtime">
-              <div class="arch-diagram-banner" aria-label="System data-flow diagram for Coco QMS and Yersin Portal">
-                <div class="arch-diagram-label">
-                  <span>DATA-FLOW // REAL-TIME QMS & PORTAL</span>
-                  <span style="color: var(--emerald);">● SOCKET.IO + RBAC</span>
-                </div>
-                <svg class="arch-diagram-svg" viewBox="0 0 520 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Reception Counter emits to Socket.IO Hub which broadcasts to Lobby Display and Audio Calling, alongside Yersin Portal RBAC">
-                  <defs>
-                    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
-                    </marker>
-                    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748B"/>
-                    </marker>
-                  </defs>
-                  <!-- Row 1: Coco QMS Real-time Flow -->
-                  <rect x="2" y="6" width="136" height="36" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                  <text x="70" y="21" text-anchor="middle" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">CLINIC COUNTER</text>
-                  <text x="70" y="34" text-anchor="middle" fill="#64748B" font-family="Inter, sans-serif" font-size="9">Call / Skip / Config</text>
-
-                  <line x1="138" y1="24" x2="188" y2="24" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-                  <text x="163" y="18" text-anchor="middle" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5">emit</text>
-
-                  <rect x="192" y="6" width="136" height="36" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
-                  <text x="260" y="21" text-anchor="middle" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">SOCKET.IO HUB</text>
-                  <text x="260" y="34" text-anchor="middle" fill="#475569" font-family="Inter, sans-serif" font-size="9">Queue State Sync</text>
-
-                  <line x1="328" y1="24" x2="378" y2="24" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-                  <text x="353" y="18" text-anchor="middle" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5">push</text>
-
-                  <rect x="382" y="6" width="136" height="36" rx="6" fill="#0F172A" stroke="#0F172A"/>
-                  <text x="450" y="21" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">LOBBY + AUDIO</text>
-                  <text x="450" y="34" text-anchor="middle" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9">Ticket A-042 🔊</text>
-
-                  <!-- Row 2: Yersin Portal -->
-                  <rect x="2" y="56" width="176" height="34" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                  <text x="90" y="71" text-anchor="middle" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">YERSIN PORTAL (TS)</text>
-                  <text x="90" y="83" text-anchor="middle" fill="#64748B" font-family="Inter, sans-serif" font-size="9">Role-Based Views</text>
-
-                  <line x1="178" y1="73" x2="226" y2="73" stroke="#64748B" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-slate)"/>
-
-                  <rect x="230" y="56" width="136" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
-                  <text x="298" y="77" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">Admin Records</text>
-
-                  <rect x="382" y="56" width="136" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
-                  <text x="450" y="77" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">Patient Profile</text>
-
-                  <line x1="366" y1="73" x2="378" y2="73" stroke="#CBD5E1" stroke-width="1.3"/>
-                </svg>
-              </div>
-              <div class="project-body">
-                <div>
-                  <div class="project-meta">
-                    <span>HEALTHCARE & QMS • ZINISOFT</span>
-                    <span>REAL-TIME WEB</span>
-                  </div>
-                  <h3 class="project-title">Coco QMS & Yersin Patient Portal</h3>
-                  <p class="project-summary">
-                    Built Coco QMS, a product-oriented queue management system with Socket.IO real-time updates, audio patient-calling, and configurable clinic settings, alongside Yersin Portal for dual-role medical records.
-                  </p>
-                </div>
-                <div class="arch-box">
-                  <strong>Engineering & UX Highlight</strong>
-                  Architected low-latency WebSocket event synchronization for clinic displays, automated audio callouts, and structured admin/patient record views backed by strict TypeScript models.
-                </div>
-                <div class="card-footer">
-                  <div class="tag-row">
-                    <span class="tag">React.js</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Socket.IO</span>
-                    <span class="tag">Audio Queue Calling</span>
-                  </div>
-                  <div class="card-status-bar">
-                    <span>Private Enterprise Deployments</span>
-                    <span>Company Products</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 6: Paradise Booking -->
-            <article class="project-card" data-category="web">
-              <div class="arch-diagram-banner" aria-label="Frontend architecture diagram for Paradise Booking Platform">
-                <div class="arch-diagram-label">
-                  <span>DATA-FLOW // FRONTEND ARCHITECTURE</span>
-                  <span style="color: var(--accent);">NEXT.JS + REDUX TOOLKIT</span>
-                </div>
-                <svg class="arch-diagram-svg" viewBox="0 0 520 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Next.js Search UI dispatches to Redux Toolkit State which syncs with Partner REST API">
-                  <defs>
-                    <marker id="arrow-blue-2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
-                    </marker>
-                  </defs>
-                  <!-- Row 1: Main Pipeline -->
-                  <rect x="2" y="6" width="140" height="36" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
-                  <text x="72" y="21" text-anchor="middle" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">NEXT.JS CLIENT</text>
-                  <text x="72" y="34" text-anchor="middle" fill="#64748B" font-family="Inter, sans-serif" font-size="9">Filters & Booking UI</text>
-
-                  <line x1="142" y1="24" x2="188" y2="24" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue-2)"/>
-                  <text x="165" y="18" text-anchor="middle" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5">state</text>
-
-                  <rect x="192" y="6" width="136" height="36" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
-                  <text x="260" y="21" text-anchor="middle" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">REDUX TOOLKIT</text>
-                  <text x="260" y="34" text-anchor="middle" fill="#475569" font-family="Inter, sans-serif" font-size="9">Search / Auth Slices</text>
-
-                  <line x1="328" y1="24" x2="374" y2="24" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue-2)"/>
-                  <text x="351" y="18" text-anchor="middle" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5">REST</text>
-
-                  <rect x="378" y="6" width="140" height="36" rx="6" fill="#0F172A" stroke="#0F172A"/>
-                  <text x="448" y="21" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">PARTNER API</text>
-                  <text x="448" y="34" text-anchor="middle" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Listings & Reservations</text>
-
-                  <!-- Row 2: Core Modules -->
-                  <rect x="2" y="56" width="164" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
-                  <text x="84" y="77" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">Multi-Criteria Search</text>
-
-                  <rect x="178" y="56" width="164" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
-                  <text x="260" y="77" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">Booking Management</text>
-
-                  <rect x="354" y="56" width="164" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
-                  <text x="436" y="77" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">Auth & Protected Routes</text>
-                </svg>
-              </div>
-              <div class="project-body">
-                <div>
-                  <div class="project-meta">
-                    <span>CAPSTONE PROJECT • HCMUTE (10/2023 – 07/2024)</span>
-                    <span>FRONTEND ARCHITECTURE</span>
-                  </div>
-                  <h3 class="project-title">Paradise Booking — Accommodation Platform</h3>
-                  <p class="project-summary">
-                    Solely engineered the entire frontend for an accommodation booking platform with multi-criteria search filters, reservation management, and authentication integrated with a partner-owned backend.
-                  </p>
-                </div>
-                <div class="arch-box">
-                  <strong>Engineering & UX Highlight</strong>
-                  Designed modular filter state synchronization, clean REST API integration, and responsive booking workflows using Next.js, TypeScript, Tailwind CSS, and Redux Toolkit.
-                </div>
-                <div class="card-footer">
-                  <div class="tag-row">
-                    <span class="tag">Next.js</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Redux Toolkit</span>
-                    <span class="tag">Tailwind CSS</span>
-                  </div>
-                  <div class="card-status-bar">
-                    <span>Graduation Capstone</span>
-                    <span>Sole Frontend Owner</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="projects-grid" id="archSystemsGrid"></div>
         </div>
+        <noscript>
+          <p class="section-desc">Enable JavaScript to inspect interactive sandboxes and case study architecture briefs.</p>
+        </noscript>
       </div>
     </section>
 
-    <!-- Section 03: Experience & Education -->
-    <section id="experience">
+    <!-- Section 03: Experience & Background -->
+    <section id="experience" class="page-section">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="eyebrow">03 // Experience & Background</span>
-            <h2 class="section-title">Career Progression & Engineering Ownership</h2>
+            <span class="eyebrow">03 // Experience &amp; Background</span>
+            <h2 class="section-title">Career Progression &amp; Engineering Ownership</h2>
           </div>
         </div>
 
@@ -1737,7 +408,7 @@
                 <h3 class="exp-role">Frontend Developer</h3>
                 <div class="exp-company">ZiniSoft Ltd. Co • Thu Duc City, HCMC</div>
               </div>
-              <span class="exp-period">10/2023 – Present</span>
+              <span class="exp-period tabular-nums">10/2023 – Present</span>
             </div>
             <ul class="exp-list">
               <li>Progressed from feature contributions and bug fixes on existing systems to owning full frontend architecture for new web and mobile products.</li>
@@ -1755,7 +426,7 @@
                 <div class="edu-label">Education</div>
                 <div class="edu-title">B.S. in Software Technology (IT)</div>
                 <div class="edu-sub">HCMC University of Technology and Education</div>
-                <div class="edu-sub" style="font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-muted); margin-top: 4px;">2020 – 2024 • Thu Duc City, HCMC</div>
+                <div class="edu-meta tabular-nums">2020 – 2024 • Thu Duc City, HCMC</div>
               </div>
               <div class="edu-item">
                 <div class="edu-label">Languages</div>
@@ -1765,7 +436,7 @@
               <div class="edu-item">
                 <div class="edu-label">Store Delivery Track Record</div>
                 <div class="edu-title">3 Production Store Releases</div>
-                <div class="edu-sub">End-to-end release builds, native SDK configs, and review resolution on both Apple App Store & Google Play Store.</div>
+                <div class="edu-sub">End-to-end release builds, native SDK configs, and review resolution on both Apple App Store &amp; Google Play Store.</div>
               </div>
             </div>
           </div>
@@ -1774,12 +445,12 @@
     </section>
 
     <!-- Section 04: Technical Matrix -->
-    <section id="stack">
+    <section id="stack" class="page-section">
       <div class="container">
         <div class="section-head">
           <div>
             <span class="eyebrow">04 // Technical Capabilities</span>
-            <h2 class="section-title">Production Stack & Engineering Practices</h2>
+            <h2 class="section-title">Production Stack &amp; Engineering Practices</h2>
           </div>
         </div>
 
@@ -1796,7 +467,7 @@
           </div>
 
           <div class="skill-group">
-            <h3>Mobile & Native</h3>
+            <h3>Mobile &amp; Native</h3>
             <ul class="skill-list">
               <li><span>React Native</span><span class="skill-level">Core</span></li>
               <li><span>Expo Ecosystem</span><span class="skill-level">Core</span></li>
@@ -1806,7 +477,7 @@
           </div>
 
           <div class="skill-group">
-            <h3>Payments & Real-time</h3>
+            <h3>Payments &amp; Real-time</h3>
             <ul class="skill-list">
               <li><span>Stripe SDK</span><span class="skill-level">FinTech</span></li>
               <li><span>Apple Pay / Google Pay</span><span class="skill-level">Native</span></li>
@@ -1816,7 +487,7 @@
           </div>
 
           <div class="skill-group">
-            <h3>Backend & Tooling</h3>
+            <h3>Backend &amp; Tooling</h3>
             <ul class="skill-list">
               <li><span>Node.js / Express / Nest.js</span><span class="skill-level">API</span></li>
               <li><span>PostgreSQL / MongoDB</span><span class="skill-level">DB</span></li>
@@ -1830,47 +501,130 @@
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer class="site-footer">
     <div class="container footer-flex">
       <div>
-        <strong style="font-size: 17px;">Le Minh Tuong</strong>
-        <p style="font-size: 13.5px; color: var(--ink-secondary);">Frontend Engineer • Thu Duc City, Ho Chi Minh City, Vietnam</p>
+        <strong class="footer-name">Le Minh Tuong</strong>
+        <p class="footer-meta">Frontend Engineer • Thu Duc City, Ho Chi Minh City, Vietnam</p>
       </div>
 
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button id="copyEmailBtn" type="button" class="btn">Copy Email</button>
-        <a href="./CV%20L%C3%AA%20Minh%20T%C6%B0%E1%BB%9Dng%20-%20FrontEnd%20Developer.pdf" target="_blank" rel="noopener noreferrer" class="btn">Resume PDF ↗</a>
+      <div class="footer-actions">
+        <button type="button" class="btn" data-copy-email>
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span data-copy-label>Copy Email</span>
+        </button>
+        <a href="./assets/docs/Le-Minh-Tuong-Frontend-CV.pdf" target="_blank" rel="noopener noreferrer" class="btn">
+          <span>Resume PDF</span>
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+        </a>
         <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="btn">GitHub</a>
-        <a href="https://linkedin.com/in/leminhtuong" target="_blank" rel="noopener noreferrer" class="btn">LinkedIn</a>
-        <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live App: LexiNote ↗</a>
+        <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <span>Live App: LexiNote</span>
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+        </a>
       </div>
     </div>
   </footer>
 
+  <!-- Case Study Architecture Slide-Over Drawer -->
+  <div id="caseDrawer" class="drawer-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="drawerTitle">
+    <aside class="drawer-panel">
+      <div class="drawer-head">
+        <span id="drawerEyebrow" class="drawer-eyebrow">CASE STUDY</span>
+        <div class="drawer-head-actions">
+          <button id="drawerCopyLink" type="button" class="drawer-close" title="Copy direct case study link">Copy Link</button>
+          <button id="drawerClose" type="button" class="drawer-close">ESC / Close</button>
+        </div>
+      </div>
+
+      <div class="drawer-body">
+        <div>
+          <h3 id="drawerTitle" class="drawer-title">Project Title</h3>
+          <p id="drawerSubtitle" class="drawer-subtitle"></p>
+        </div>
+
+        <div id="drawerVisual" class="drawer-visual"></div>
+
+        <div class="drawer-meta-grid">
+          <div class="drawer-meta-box">
+            <span>Role &amp; Ownership</span>
+            <strong id="drawerRole"></strong>
+          </div>
+          <div class="drawer-meta-box">
+            <span>Platforms</span>
+            <strong id="drawerPlatforms"></strong>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Problem &amp; Workflow Context</h4>
+          <p id="drawerProblem"></p>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Architecture &amp; Engineering Decisions</h4>
+          <ul id="drawerDecisions" class="drawer-bullets"></ul>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Tech Stack</h4>
+          <div id="drawerTags" class="tag-row"></div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <span id="drawerOwnership"></span>
+        <div id="drawerLiveSlot"></div>
+      </div>
+    </aside>
+  </div>
+
   <!-- Command Palette Modal (Ctrl+K / Cmd+K) -->
-  <div id="cmdModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Quick Navigation">
+  <div id="cmdModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Command Palette">
     <div class="cmd-modal">
-      <input id="cmdSearch" class="cmd-input" type="text" placeholder="Type a command or jump to section..." />
+      <div class="cmd-search-wrap">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <input id="cmdSearch" class="cmd-input" type="text" placeholder="Search sections, case studies, or actions..." autocomplete="off" />
+      </div>
+
       <div class="cmd-list" id="cmdList">
-        <a href="#lab" class="cmd-item"><span>Jump to: Interactive Engineering Lab</span><span class="kbd">01</span></a>
-        <a href="#work" class="cmd-item"><span>Jump to: Selected Case Studies</span><span class="kbd">02</span></a>
-        <a href="#experience" class="cmd-item"><span>Jump to: Experience & Education</span><span class="kbd">03</span></a>
-        <a href="#stack" class="cmd-item"><span>Jump to: Technical Capabilities</span><span class="kbd">04</span></a>
-        <div id="cmdCopyEmail" class="cmd-item" role="button" tabindex="0"><span>Action: Copy Email (leminhtuong09122002@gmail.com)</span><span class="kbd">COPY</span></div>
-        <a href="./CV%20L%C3%AA%20Minh%20T%C6%B0%E1%BB%9Dng%20-%20FrontEnd%20Developer.pdf" target="_blank" rel="noopener noreferrer" class="cmd-item"><span>Document: Open Resume / CV (PDF)</span><span class="kbd">PDF</span></a>
-        <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="cmd-item"><span>External: Open LexiNote Live Demo</span><span class="kbd">↗</span></a>
-        <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="cmd-item"><span>External: Open GitHub Profile</span><span class="kbd">↗</span></a>
-        <a href="https://linkedin.com/in/leminhtuong" target="_blank" rel="noopener noreferrer" class="cmd-item"><span>External: Open LinkedIn Profile</span><span class="kbd">↗</span></a>
+        <div class="cmd-group-label" data-group="nav">Navigation</div>
+        <a href="#lab" class="cmd-item" data-group="nav" data-keywords="sandbox interactive ble payment kindie"><span>Jump to: Interactive Engineering Lab</span><span class="kbd">01</span></a>
+        <a href="#work" class="cmd-item" data-group="nav" data-keywords="projects portfolio case studies"><span>Jump to: Selected Case Studies</span><span class="kbd">02</span></a>
+        <a href="#experience" class="cmd-item" data-group="nav" data-keywords="zinisoft hcmute toeic education"><span>Jump to: Experience &amp; Background</span><span class="kbd">03</span></a>
+        <a href="#stack" class="cmd-item" data-group="nav" data-keywords="skills react typescript native"><span>Jump to: Technical Capabilities</span><span class="kbd">04</span></a>
+
+        <div class="cmd-group-label" data-group="cases">Inspect Case Studies</div>
+        <div id="cmdCasesSlot"></div>
+
+        <div class="cmd-group-label" data-group="actions">Actions &amp; Links</div>
+        <button type="button" class="cmd-item" data-group="actions" data-action="copy-email" data-keywords="contact mail gmail"><span>Copy Email (leminhtuong09122002@gmail.com)</span><span class="kbd">COPY</span></button>
+        <a href="./assets/docs/Le-Minh-Tuong-Frontend-CV.pdf" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="cv resume pdf"><span>Open Resume / CV (PDF)</span><span class="kbd">PDF</span></a>
+        <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="demo live app"><span>Open LexiNote Live Demo</span><span class="kbd">↗</span></a>
+        <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="code repo profile"><span>Open GitHub Profile</span><span class="kbd">↗</span></a>
+
+        <div id="cmdEmpty" class="cmd-empty" hidden>No matching commands found.</div>
+      </div>
+
+      <div class="cmd-footer">
+        <span>↑↓ Navigate · ↵ Select</span>
+        <span>ESC Close</span>
       </div>
     </div>
   </div>
 
   <!-- Thumbnail Lightbox Modal -->
-  <div id="lightboxModal" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-label="Project Preview">
+  <div id="lightboxModal" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Project UI Preview">
     <div class="lightbox-card">
       <div class="lightbox-head">
         <span id="lightboxTitle">Preview</span>
-        <button id="lightboxClose" type="button" class="lightbox-close">ESC / Close</button>
+        <button id="lightboxClose" type="button" class="drawer-close">ESC / Close</button>
       </div>
       <div class="lightbox-body">
         <img id="lightboxImg" src="" alt="Project UI preview" />
@@ -1878,217 +632,19 @@
     </div>
   </div>
 
-  <script>
-    // 1. Multi-Platform Attendance Sync (Kindie)
-    const syncBtn = document.getElementById('syncBtn');
-    const mobileBadge = document.getElementById('mobileBadge');
-    const kpiPresent = document.getElementById('kpiPresent');
-    const kpiPicked = document.getElementById('kpiPicked');
-    const kpiMarked = document.getElementById('kpiMarked');
-    const phonePush = document.getElementById('phonePush');
-    const phoneMsg = document.getElementById('phoneMsg');
-    let checkedOut = false;
+  <!-- Toast Notification -->
+  <div class="toast-region" role="status" aria-live="polite" aria-atomic="true">
+    <div id="toastNotification" class="toast">
+      <span class="toast-dot" aria-hidden="true"></span>
+      <span id="toastText">Copied to clipboard</span>
+    </div>
+  </div>
 
-    syncBtn.addEventListener('click', () => {
-      checkedOut = !checkedOut;
-      const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-      if (checkedOut) {
-        mobileBadge.textContent = 'PICKED UP';
-        mobileBadge.classList.add('done');
-        kpiPresent.textContent = '14';
-        kpiPicked.textContent = '1';
-        kpiMarked.textContent = '6/6';
-        syncBtn.textContent = 'Reset Demo State';
-        syncBtn.classList.remove('btn-primary');
-        phonePush.classList.add('verified');
-        phoneMsg.innerHTML = `<span style="color: var(--emerald); font-weight: 600;">Synced (${time}):</span> Parent notified — Smith Bailey Emma safely picked up.`;
-      } else {
-        mobileBadge.textContent = 'IN CLASS';
-        mobileBadge.classList.remove('done');
-        kpiPresent.textContent = '15';
-        kpiPicked.textContent = '0';
-        kpiMarked.textContent = '5/6';
-        syncBtn.textContent = 'Mark Picked Up & Notify';
-        syncBtn.classList.add('btn-primary');
-        phonePush.classList.remove('verified');
-        phoneMsg.textContent = 'Awaiting afternoon check-out trigger...';
-      }
-    });
-
-    // 2. BLE IoT Diffuser Simulation (Kodo Fragrances)
-    const bleScan = document.getElementById('bleScan');
-    const bleAuth = document.getElementById('bleAuth');
-    const bleSend = document.getElementById('bleSend');
-    const bleReset = document.getElementById('bleReset');
-    const bleLog = document.getElementById('bleLog');
-
-    function logBle(tag, cls, text) {
-      const ts = new Date().toLocaleTimeString('en-GB', { hour12: false });
-      const row = document.createElement('div');
-      row.innerHTML = `<span class="t-dim">[${ts}]</span> <span class="${cls}">[${tag}]</span> ${text}`;
-      bleLog.appendChild(row);
-      bleLog.scrollTop = bleLog.scrollHeight;
-    }
-
-    bleScan.addEventListener('click', () => {
-      bleScan.disabled = true;
-      logBle('SCAN', 't-blue', 'Scanning BLE peripherals (16s timeout)...');
-      setTimeout(() => {
-        logBle('FOUND', 't-green', 'Kodo RadarX (SA_KDAir 2.up) • RSSI -52dBm. GATT resolved.');
-        bleAuth.disabled = false;
-      }, 500);
-    });
-
-    bleAuth.addEventListener('click', () => {
-      bleAuth.disabled = true;
-      logBle('AUTH', 't-blue', 'Verifying 4-digit device PIN over GATT characteristic...');
-      setTimeout(() => {
-        logBle('ACK', 't-green', 'PIN verified. Switched diffuser to App Mode.');
-        bleSend.disabled = false;
-      }, 450);
-    });
-
-    bleSend.addEventListener('click', () => {
-      logBle('TX', 't-amber', 'Write Config: { intensity: "MED", workSec: 10, pauseSec: 100, occupancy: "1-5" }');
-      setTimeout(() => {
-        logBle('NOTIFY', 't-green', 'Diffuser active. Oil capacity: 165/200ml.');
-      }, 320);
-    });
-
-    bleReset.addEventListener('click', () => {
-      bleScan.disabled = false;
-      bleAuth.disabled = true;
-      bleSend.disabled = true;
-      bleLog.innerHTML = '<div><span class="t-dim">[INIT]</span> BLE Central Manager ready. Waiting to scan...</div>';
-    });
-
-    // 3. Payment Gateway Sandbox (BAMI)
-    let activeProvider = 'Apple Pay (Wallet)';
-    const payMethods = document.querySelectorAll('.pay-method');
-    const payOutput = document.getElementById('payOutput');
-    const runPayBtn = document.getElementById('runPayBtn');
-
-    payMethods.forEach(el => {
-      el.addEventListener('click', () => {
-        payMethods.forEach(m => m.classList.remove('active'));
-        el.classList.add('active');
-        activeProvider = el.dataset.provider;
-        payOutput.innerHTML = `Selected Provider: <strong>${activeProvider}</strong> — Ready to tokenize payload.`;
-      });
-    });
-
-    runPayBtn.addEventListener('click', () => {
-      runPayBtn.disabled = true;
-      payOutput.innerHTML = `Requesting payment authorization via <strong>${activeProvider}</strong>...`;
-      setTimeout(() => {
-        const token = 'tok_' + Math.random().toString(36).substring(2, 10);
-        payOutput.innerHTML = `<span style="color: var(--emerald); font-weight: 600;">✓ Authorized ($13.00 AUD):</span> Token <code>${token}</code> confirmed • Pickup Order <strong>#CBXMCP3PW</strong> queued.`;
-        runPayBtn.disabled = false;
-      }, 600);
-    });
-
-    // 4. Case Study Domain Filter (Tier-aware)
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const featuredGrid = document.getElementById('projectsContainer');
-    const archTier = document.getElementById('archSystemsTier');
-    const archGrid = document.getElementById('archSystemsGrid');
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-
-        const updateGrid = (gridEl) => {
-          let visibleCount = 0;
-          gridEl.querySelectorAll('.project-card').forEach(card => {
-            const match = filter === 'all' || card.dataset.category.includes(filter);
-            card.style.display = match ? 'flex' : 'none';
-            if (match) visibleCount++;
-          });
-          return visibleCount;
-        };
-
-        const featuredCount = updateGrid(featuredGrid);
-        const archCount = updateGrid(archGrid);
-        featuredGrid.style.display = featuredCount > 0 ? 'grid' : 'none';
-        archTier.style.display = archCount > 0 ? 'block' : 'none';
-        archTier.style.marginTop = featuredCount > 0 ? '34px' : '0';
-      });
-    });
-
-    // 5. Image Lightbox Preview
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxTitle = document.getElementById('lightboxTitle');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    function closeLightbox() {
-      lightboxModal.classList.remove('open');
-    }
-
-    document.querySelectorAll('.project-thumb.zoomable').forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        lightboxImg.src = thumb.dataset.lightboxSrc;
-        lightboxTitle.textContent = thumb.dataset.lightboxTitle;
-        lightboxModal.classList.add('open');
-      });
-    });
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightbox(); });
-
-    // 6. Command Palette (Ctrl+K / Cmd+K) & Copy Email
-    const cmdModal = document.getElementById('cmdModal');
-    const openCmd = document.getElementById('openCmd');
-    const cmdSearch = document.getElementById('cmdSearch');
-    const cmdItems = document.querySelectorAll('.cmd-item');
-
-    function toggleCmd(show) {
-      cmdModal.classList.toggle('open', show);
-      if (show) {
-        cmdSearch.value = '';
-        cmdItems.forEach(i => i.style.display = 'flex');
-        cmdSearch.focus();
-      }
-    }
-
-    openCmd.addEventListener('click', () => toggleCmd(true));
-    cmdModal.addEventListener('click', (e) => { if (e.target === cmdModal) toggleCmd(false); });
-
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        closeLightbox();
-        toggleCmd(!cmdModal.classList.contains('open'));
-      }
-      if (e.key === 'Escape') {
-        toggleCmd(false);
-        closeLightbox();
-      }
-    });
-
-    cmdSearch.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      cmdItems.forEach(item => {
-        item.style.display = item.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
-      });
-    });
-
-    cmdItems.forEach(item => item.addEventListener('click', () => toggleCmd(false)));
-
-    function copyEmail(btnEl) {
-      navigator.clipboard.writeText('leminhtuong09122002@gmail.com');
-      if (btnEl) {
-        const orig = btnEl.textContent;
-        btnEl.textContent = 'Copied to Clipboard ✓';
-        setTimeout(() => btnEl.textContent = orig, 2000);
-      }
-    }
-
-    document.getElementById('copyEmailBtn').addEventListener('click', function() { copyEmail(this); });
-    document.getElementById('cmdCopyEmail').addEventListener('click', () => copyEmail(document.getElementById('copyEmailBtn')));
-  </script>
+  <!-- Sticky Scroll-to-Top Button -->
+  <button id="scrollTopBtn" type="button" class="scroll-top-btn" aria-label="Scroll back to top" title="Back to top">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
 </body>
 </html>

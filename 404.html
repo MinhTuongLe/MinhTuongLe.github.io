@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Tuong Le</title>
+  <meta name="theme-color" content="#F8FAFC" />
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/components.css" />
+  <style>
+    .not-found-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .not-found-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .not-found-top {
+      padding: 12px 18px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+    }
+
+    .not-found-code {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .not-found-body {
+      padding: 32px 26px;
+    }
+
+    .not-found-body h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .not-found-body p {
+      font-size: 14.5px;
+      color: var(--ink-secondary);
+      margin-bottom: 24px;
+    }
+
+    .not-found-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <main class="not-found-shell">
+    <section class="not-found-card" aria-labelledby="nf-title">
+      <div class="not-found-top">
+        <span>ROUTE_NOT_FOUND</span>
+        <span class="not-found-code">HTTP 404</span>
+      </div>
+      <div class="not-found-body">
+        <h1 id="nf-title">This route does not exist.</h1>
+        <p>The page you requested could not be resolved on <code>minhtuongle.github.io</code>. Return to the main portfolio to explore live sandboxes and case studies.</p>
+        <div class="not-found-actions">
+          <a href="/" class="btn btn-primary">← Back to Portfolio</a>
+          <a href="/#work" class="btn">Case Studies</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

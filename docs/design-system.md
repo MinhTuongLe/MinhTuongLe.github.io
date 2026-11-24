@@ -40,6 +40,9 @@ description: Design system, architectural rules, and copywriting guidelines for 
 5. **Performance & Motion:**
    - Zero heavy scroll-jacking libraries. Use subtle CSS transitions (`150ms`–`250ms`) only on direct user interactions.
 
-## 4. Target Production Migration Path
-- **Phase 1 (Current):** Single-file `index.html` deployed on GitHub Pages (`MinhTuongLe.github.io`).
-- **Phase 2 (Scale):** Migrate to `Vite + React + TypeScript` (or `Next.js`) + `Tailwind CSS`, preserving exact CSS variables, interactive sandboxes, and adding a Case Study Detail Drawer/Modal with real UI screenshots and SVG data-flow diagrams.
+## 4. Architecture & Constraints
+- **Current Architecture:** Modular zero-build static frontend (`index.html`, `src/styles/*.css`, `src/js/data/*.js`, `src/js/modules/*.js`) deployed directly on GitHub Pages (`MinhTuongLe.github.io`).
+- **Positioning Constraints:**
+  - Do NOT display LinkedIn links.
+  - Do NOT include job-seeking / "open to opportunities" messaging.
+  - Only include external live project links for personal project **LexiNote** (`https://lexi-note.vercel.app`); company products remain private without external URLs.
