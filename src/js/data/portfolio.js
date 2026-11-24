@@ -141,6 +141,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Delivered daily operation modules (attendance In/Out, medical reminders, nutrition/activity cards, finance/tuition) with predictable state transitions.',
       'Managed App Store and Google Play release pipelines, resolving store review requirements and build configurations.',
     ],
+    tradeoff:
+      'Kept Web Admin and Expo Mobile decoupled at the UI layer while aligning TypeScript domain contracts and workflow states — avoiding heavy cross-platform UI abstractions while keeping teacher gate operations fast during peak pickup hours.',
     tags: ['React.js', 'TypeScript', 'React Native', 'Expo', 'PWA'],
     liveUrl: null,
   },
@@ -173,6 +175,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Implemented delivery-radius validation and handled edge cases around store operating hours and cart recalculation.',
       'Managed recurring App Store and Google Play production builds, SDK upgrades, and compliance review fixes.',
     ],
+    tradeoff:
+      'Normalized Stripe, Apple Pay, Google Pay, and ANZ error codes behind a single checkout adapter so cart state never resets on gateway timeout, letting customers retry or switch wallets cleanly without losing customized items.',
     tags: ['React Native', 'Stripe SDK', 'Apple Pay', 'Google Pay', 'ANZ Gateway'],
     liveUrl: null,
   },
@@ -205,6 +209,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Handled hardware disconnect recovery, permission flows across iOS/Android OS versions, and App Mode state toggles.',
       'Delivered end-to-end production releases on both Apple App Store and Google Play Store.',
     ],
+    tradeoff:
+      'Isolated BLE connection lifecycle and OS-specific permission checks (Android GATT 133 vs iOS CoreBluetooth states) from presentation screens, enabling automatic session re-bond instead of forcing manual re-pairing on transient signal drops.',
     tags: ['React Native', 'Expo', 'Bluetooth Low Energy', 'App Store / Play Store'],
     liveUrl: null,
   },
@@ -237,6 +243,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Implemented CSV/Excel bulk import & export, audio pronunciation playback, daily study streak tracking, and accuracy analytics.',
       'Engineered and deployed the full stack reliably on free-tier cloud infrastructure.',
     ],
+    tradeoff:
+      'Balanced full-stack features on free-tier hosting by validating CSV/Excel payloads client-side before batch upload and designing resilient loading states for API cold starts without complicating infrastructure.',
     tags: ['Vite + React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'Nest.js', 'PostgreSQL'],
     liveUrl: PROFILE.lexinoteUrl,
   },
@@ -268,6 +276,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Structured strict TypeScript domain models and role-based views for Yersin Portal separating admin record management from patient profile access.',
       'Applied modular component boundaries and predictable error handling for continuous clinic-floor uptime.',
     ],
+    tradeoff:
+      'Serialized incoming Socket.IO ticket announcements through a deterministic client-side audio playback queue and resynced full board state on reconnect, preventing overlapping clinic voice announcements during rapid counter calls.',
     tags: ['React.js', 'TypeScript', 'Socket.IO', 'Audio Queue Calling'],
     liveUrl: null,
   },
@@ -299,6 +309,8 @@ export const CASE_STUDIES_LIST = Object.freeze([
       'Structured Next.js routing, protected route guards, and responsive reservation views in TypeScript and Tailwind CSS.',
       'Delivered end-to-end frontend features independently on schedule for graduation defense.',
     ],
+    tradeoff:
+      'Centralized multi-criteria search parameters and pagination into normalized Redux Toolkit slices rather than scattered component state, keeping URL/UI filter changes predictable against a partner-owned REST API.',
     tags: ['Next.js', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS'],
     liveUrl: null,
   },

@@ -1,0 +1,120 @@
+name: Portfolio Quality Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check JavaScript syntax
+        run: |
+          for file in $(find src/js -name '*.js' | sort); do
+            echo "Checking $file"
+            node --check "$file"
+          done
+
+      - name: Verify portfolio data integrity & privacy rules
+        run: |
+          node --input-type=module -e "
+            import fs from 'node:fs';
+            import { PROFILE, CASE_STUDIES_LIST, CASE_STUDIES_MAP, buildArchitectureDiagram } from './src/js/data/portfolio.js';
+
+            if (!PROFILE.email || !PROFILE.githubUrl) {
+              throw new Error('Missing core PROFILE fields');
+            }
+            if (CASE_STUDIES_LIST.length !== 6) {
+              throw new Error('Expected 6 case studies, got ' + CASE_STUDIES_LIST.length);
+            }
+            for (const item of CASE_STUDIES_LIST) {
+              if (!CASE_STUDIES_MAP[item.id]) throw new Error('Missing map entry: ' + item.id);
+              if (item.liveUrl && item.id !== 'lexinote') {
+                throw new Error('Only lexinote may expose liveUrl: ' + item.id);
+              }
+              if (item.thumbnail && !fs.existsSync(item.thumbnail)) {
+                throw new Error('Missing thumbnail: ' + item.thumbnail);
+              }
+              if (item.diagramType) {
+                const svg = buildArchitectureDiagram(item.diagramType, '-drawer');
+                if (!svg.includes('-drawer')) throw new Error('SVG suffix missing for ' + item.id);
+              }
+            }
+            if (!fs.existsSync(PROFILE.cvPath)) {
+              throw new Error('Missing CV PDF: ' + PROFILE.cvPath);
+            }
+            console.log('ESM_DATA_CHECK_PASS');
+          "
+
+      - name: Audit HTML, assets & content guardrails
+        run: |
+          python3 - <<'PY'
+          import json
+          import pathlib
+          import re
+          import sys
+
+          root = pathlib.Path('.')
+          index_html = (root / 'index.html').read_text(encoding='utf-8')
+          not_found_html = (root / '404.html').read_text(encoding='utf-8')
+
+          # 1. Verify JSON-LD parses cleanly
+          ld_match = re.search(
+              r'<script type="application/ld\+json">(.*?)</script>',
+              index_html,
+              re.DOTALL,
+          )
+          assert ld_match, 'Missing JSON-LD structured data in index.html'
+          ld_data = json.loads(ld_match.group(1))
+          assert ld_data.get('@type') == 'Person', 'Invalid JSON-LD @type'
+
+          # 2. Verify no forbidden content (LinkedIn or job-seeking copy)
+          forbidden_patterns = [
+              r'linkedin',
+              r'open to (?:new )?opportunit',
+              r'looking for a new (?:role|job)',
+              r'available for hire',
+              r'actively seeking',
+          ]
+          scan_files = [
+              root / 'index.html',
+              root / '404.html',
+              *sorted((root / 'src').rglob('*.*')),
+          ]
+          for path in scan_files:
+              text = path.read_text(encoding='utf-8').lower()
+              for pattern in forbidden_patterns:
+                  if re.search(pattern, text):
+                      sys.exit(f'Forbidden pattern {pattern!r} found in {path}')
+
+          # 3. Verify no empty img src or inline style attributes in index.html
+          assert 'src=""' not in index_html, 'Found empty src="" in index.html'
+          assert not re.search(r'\sstyle="', index_html), 'Found inline style attribute in index.html'
+
+          # 4. Verify referenced local assets exist
+          for ref in re.findall(r'(?:href|src)="(\./[^"#?]+)"', index_html):
+              target = root / ref.lstrip('./')
+              assert target.exists(), f'Missing asset referenced in index.html: {ref}'
+
+          for ref in re.findall(r'(?:href|src)="(/[^"#?]+)"', not_found_html):
+              if ref == '/':
+                  continue
+              target = root / ref.lstrip('/')
+              assert target.exists(), f'Missing asset referenced in 404.html: {ref}'
+
+          # 5. Verify SEO files exist
+          for required in ('robots.txt', 'sitemap.xml', 'assets/og-cover.png', 'assets/icons/apple-touch-icon.png'):
+              assert (root / required).exists(), f'Missing required file: {required}'
+
+          print('STATIC_AUDIT_PASS')
+          PY

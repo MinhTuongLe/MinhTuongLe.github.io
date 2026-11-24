@@ -311,6 +311,7 @@ function initBamiSandbox() {
         isProcessing = false;
 
         document.getElementById('payRetryFallbackBtn')?.addEventListener('click', () => {
+          if (failToggle) failToggle.checked = false;
           selectProviderUi(fallbackProvider);
           runCheckout({ forceSuccess: true });
         });

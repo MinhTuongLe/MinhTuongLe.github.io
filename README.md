@@ -6,13 +6,16 @@ Product-minded Frontend Engineer portfolio built in **Light Technical Mode** (*T
 
 ```text
 .
-├── index.html                  # Semantic entry document
+├── index.html                  # Semantic entry document (+ JSON-LD & OG metadata)
 ├── 404.html                    # Custom GitHub Pages 404 route
+├── robots.txt                  # Search crawler rules
+├── sitemap.xml                 # XML sitemap for GitHub Pages
 ├── .gitignore                  # Repository ignore rules
+├── .github/workflows/ci.yml    # Automated JS syntax, asset & content checks
 ├── assets/
 │   ├── og-cover.png            # 1200x630 OpenGraph / social preview card
 │   ├── docs/                   # Resume / CV PDF
-│   ├── icons/                  # Brand SVG favicon
+│   ├── icons/                  # Brand SVG favicon & 180x180 Apple Touch Icon
 │   └── thumbnails/             # Optimized 16:10 WebP project captures
 ├── docs/
 │   └── design-system.md        # Visual tokens & architecture guidelines
@@ -28,7 +31,7 @@ Product-minded Frontend Engineer portfolio built in **Light Technical Mode** (*T
         │   └── portfolio.js    # Structured case study & command metadata
         └── modules/
             ├── a11y.js         # Shared modal/drawer focus-trap helper
-            ├── navigation.js   # Scroll progress, scroll-spy & mobile nav
+            ├── navigation.js   # Scroll progress, scroll-spy, mobile nav & back-to-top
             ├── sandboxes.js    # Kindie sync, Kodo BLE & BAMI checkout labs
             ├── caseStudies.js  # Data-driven cards, filtering, drawer & lightbox
             ├── commandPalette.js # Keyboard-first Ctrl/Cmd+K navigation

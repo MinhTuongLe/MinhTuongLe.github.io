@@ -20,6 +20,11 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
 
   if (!cmdModal || !openCmdBtn || !cmdSearch || !cmdList) return;
 
+  // Hydrate email label from Single Source of Truth
+  cmdList.querySelectorAll('[data-profile-email]').forEach((el) => {
+    el.textContent = PROFILE.email;
+  });
+
   // Populate Case Study commands from Single Source of Truth
   if (cmdCasesSlot) {
     cmdCasesSlot.innerHTML = '';

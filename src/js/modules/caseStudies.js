@@ -97,6 +97,7 @@ export function initCaseStudies() {
   // Drawer elements
   const drawerBackdrop = document.getElementById('caseDrawer');
   const drawerPanel = drawerBackdrop?.querySelector('.drawer-panel');
+  const drawerBody = drawerBackdrop?.querySelector('.drawer-body');
   const drawerEyebrow = document.getElementById('drawerEyebrow');
   const drawerTitle = document.getElementById('drawerTitle');
   const drawerSubtitle = document.getElementById('drawerSubtitle');
@@ -105,11 +106,16 @@ export function initCaseStudies() {
   const drawerPlatforms = document.getElementById('drawerPlatforms');
   const drawerProblem = document.getElementById('drawerProblem');
   const drawerDecisions = document.getElementById('drawerDecisions');
+  const drawerTradeoffSection = document.getElementById('drawerTradeoffSection');
+  const drawerTradeoff = document.getElementById('drawerTradeoff');
   const drawerTags = document.getElementById('drawerTags');
   const drawerOwnership = document.getElementById('drawerOwnership');
   const drawerLiveSlot = document.getElementById('drawerLiveSlot');
   const drawerCopyLink = document.getElementById('drawerCopyLink');
   const drawerClose = document.getElementById('drawerClose');
+  const drawerPrev = document.getElementById('drawerPrev');
+  const drawerNext = document.getElementById('drawerNext');
+  const drawerCounter = document.getElementById('drawerCounter');
 
   let activeCaseId = null;
   let lastDrawerTrigger = null;
@@ -153,6 +159,7 @@ export function initCaseStudies() {
     if (!lightboxModal || !lightboxImg || !lightboxTitle) return;
     lastLightboxTrigger = triggerEl || document.activeElement;
     lightboxImg.src = src;
+    lightboxImg.alt = title || 'Project UI preview';
     lightboxTitle.textContent = title;
     lightboxModal.classList.add('open');
     lightboxModal.setAttribute('aria-hidden', 'false');
@@ -164,6 +171,7 @@ export function initCaseStudies() {
     if (!lightboxModal || !lightboxModal.classList.contains('open')) return;
     lightboxModal.classList.remove('open');
     lightboxModal.setAttribute('aria-hidden', 'true');
+    lightboxImg?.removeAttribute('src');
     syncBodyLock();
     if (lastLightboxTrigger && typeof lastLightboxTrigger.focus === 'function') {
       lastLightboxTrigger.focus();
@@ -195,7 +203,11 @@ export function initCaseStudies() {
     activeCaseId = null;
 
     if (updateUrl && window.location.hash.startsWith('#case=')) {
-      history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      if (window.history.state && window.history.state.caseId) {
+        window.history.back();
+      } else {
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      }
     }
 
     syncBodyLock();
@@ -205,12 +217,20 @@ export function initCaseStudies() {
     }
   };
 
-  const openCaseStudy = (projectId, triggerEl = null, { updateUrl = true } = {}) => {
+  const openCaseStudy = (projectId, triggerEl = null, { historyMode = 'push' } = {}) => {
     const data = CASE_STUDIES_MAP[projectId];
     if (!data || !drawerBackdrop) return;
 
+    const wasOpen = drawerBackdrop.classList.contains('open');
     activeCaseId = projectId;
-    lastDrawerTrigger = triggerEl || document.activeElement;
+    if (!wasOpen) {
+      lastDrawerTrigger = triggerEl || document.activeElement;
+    }
+
+    const currentIndex = CASE_STUDIES_LIST.findIndex((item) => item.id === projectId);
+    if (drawerCounter && currentIndex >= 0) {
+      drawerCounter.textContent = `${currentIndex + 1} / ${CASE_STUDIES_LIST.length}`;
+    }
 
     drawerEyebrow.textContent = data.eyebrow;
     drawerTitle.textContent = data.title;
@@ -219,6 +239,11 @@ export function initCaseStudies() {
     drawerPlatforms.textContent = data.platforms;
     drawerProblem.textContent = data.problem;
     drawerOwnership.textContent = data.ownership;
+
+    if (drawerTradeoffSection && drawerTradeoff) {
+      drawerTradeoffSection.hidden = !data.tradeoff;
+      drawerTradeoff.textContent = data.tradeoff || '';
+    }
 
     // Render visual preview (zoomable screenshot or unique-ID architecture SVG)
     drawerVisual.innerHTML = '';
@@ -241,7 +266,6 @@ export function initCaseStudies() {
     } else if (data.diagramType) {
       const banner = document.createElement('div');
       banner.className = 'arch-diagram-banner';
-      banner.style.borderBottom = 'none';
       banner.innerHTML = buildArchitectureDiagram(data.diagramType, '-drawer');
       drawerVisual.appendChild(banner);
     }
@@ -273,20 +297,36 @@ export function initCaseStudies() {
       drawerLiveSlot.appendChild(link);
     }
 
-    if (updateUrl) {
-      history.replaceState(null, '', `#case=${projectId}`);
+    if (historyMode === 'push' && !wasOpen) {
+      window.history.pushState({ caseId: projectId }, '', `#case=${projectId}`);
+    } else if (historyMode !== 'none') {
+      window.history.replaceState({ caseId: projectId }, '', `#case=${projectId}`);
     }
 
     drawerBackdrop.classList.add('open');
     drawerBackdrop.setAttribute('aria-hidden', 'false');
+    if (drawerBody) drawerBody.scrollTop = 0;
     syncBodyLock();
-    drawerClose?.focus();
+    if (!wasOpen) {
+      drawerClose?.focus();
+    }
+  };
+
+  const navigateCase = (delta) => {
+    if (!activeCaseId) return;
+    const idx = CASE_STUDIES_LIST.findIndex((item) => item.id === activeCaseId);
+    if (idx < 0) return;
+    const nextIdx = (idx + delta + CASE_STUDIES_LIST.length) % CASE_STUDIES_LIST.length;
+    openCaseStudy(CASE_STUDIES_LIST[nextIdx].id, null, { historyMode: 'replace' });
   };
 
   // Bind all case study triggers (both Section 01 Lab headers and Section 02 Cards)
   document.querySelectorAll('[data-open-case]').forEach((btn) => {
     btn.addEventListener('click', () => openCaseStudy(btn.dataset.openCase, btn));
   });
+
+  drawerPrev?.addEventListener('click', () => navigateCase(-1));
+  drawerNext?.addEventListener('click', () => navigateCase(1));
 
   drawerCopyLink?.addEventListener('click', () => {
     if (!activeCaseId) return;
@@ -299,20 +339,21 @@ export function initCaseStudies() {
     if (e.target === drawerBackdrop) closeDrawer();
   });
 
-  // URL Deep-Linking on load & hashchange
-  const initialCaseId = getCaseIdFromHash();
-  if (initialCaseId) {
-    openCaseStudy(initialCaseId, null, { updateUrl: false });
-  }
-
-  window.addEventListener('hashchange', () => {
+  // URL Deep-Linking on load, popstate & hashchange
+  const syncDrawerFromUrl = () => {
     const hashCaseId = getCaseIdFromHash();
     if (hashCaseId) {
-      openCaseStudy(hashCaseId, null, { updateUrl: false });
+      if (hashCaseId !== activeCaseId || !drawerBackdrop?.classList.contains('open')) {
+        openCaseStudy(hashCaseId, null, { historyMode: 'none' });
+      }
     } else if (drawerBackdrop?.classList.contains('open')) {
       closeDrawer({ updateUrl: false });
     }
-  });
+  };
+
+  syncDrawerFromUrl();
+  window.addEventListener('popstate', syncDrawerFromUrl);
+  window.addEventListener('hashchange', syncDrawerFromUrl);
 
   // --- Tier-aware Domain Filter ---
   filterBtns.forEach((btn) => {
@@ -366,6 +407,12 @@ export function initCaseStudies() {
     if (drawerBackdrop?.classList.contains('open')) {
       if (e.key === 'Escape') {
         closeDrawer();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateCase(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateCase(1);
       } else {
         trapFocus(drawerPanel, e);
       }

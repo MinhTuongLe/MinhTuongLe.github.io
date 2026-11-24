@@ -19,6 +19,44 @@
   <meta name="twitter:description" content="Frontend architecture across multi-platform web & mobile apps, payment SDKs, and real-time BLE IoT systems." />
   <meta name="twitter:image" content="https://minhtuongle.github.io/assets/og-cover.png" />
   <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Le Minh Tuong",
+      "alternateName": "Tuong Le",
+      "url": "https://minhtuongle.github.io/",
+      "image": "https://minhtuongle.github.io/assets/og-cover.png",
+      "jobTitle": "Frontend Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "ZiniSoft Ltd. Co"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Ho Chi Minh City University of Technology and Education"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ho Chi Minh City",
+        "addressCountry": "VN"
+      },
+      "sameAs": [
+        "https://github.com/MinhTuongLe"
+      ],
+      "knowsAbout": [
+        "React.js",
+        "TypeScript",
+        "React Native",
+        "Expo",
+        "Next.js",
+        "Bluetooth Low Energy",
+        "Payment Gateway Integration",
+        "Socket.IO"
+      ]
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -569,6 +607,11 @@
           <ul id="drawerDecisions" class="drawer-bullets"></ul>
         </div>
 
+        <div class="drawer-section" id="drawerTradeoffSection">
+          <h4>Key Trade-off &amp; Technical Challenge</h4>
+          <p id="drawerTradeoff" class="drawer-tradeoff"></p>
+        </div>
+
         <div class="drawer-section">
           <h4>Tech Stack</h4>
           <div id="drawerTags" class="tag-row"></div>
@@ -576,8 +619,15 @@
       </div>
 
       <div class="drawer-footer">
-        <span id="drawerOwnership"></span>
-        <div id="drawerLiveSlot"></div>
+        <div class="drawer-footer-meta">
+          <span id="drawerOwnership"></span>
+          <div id="drawerLiveSlot"></div>
+        </div>
+        <div class="drawer-nav-row" aria-label="Case study pagination">
+          <button id="drawerPrev" type="button" class="drawer-nav-btn" title="Previous case study (Left Arrow)">← Previous</button>
+          <span id="drawerCounter" class="drawer-nav-pos tabular-nums">1 / 6</span>
+          <button id="drawerNext" type="button" class="drawer-nav-btn" title="Next case study (Right Arrow)">Next →</button>
+        </div>
       </div>
     </aside>
   </div>
@@ -604,7 +654,7 @@
         <div id="cmdCasesSlot"></div>
 
         <div class="cmd-group-label" data-group="actions">Actions &amp; Links</div>
-        <button type="button" class="cmd-item" data-group="actions" data-action="copy-email" data-keywords="contact mail gmail"><span>Copy Email (leminhtuong09122002@gmail.com)</span><span class="kbd">COPY</span></button>
+        <button type="button" class="cmd-item" data-group="actions" data-action="copy-email" data-keywords="contact mail gmail"><span>Copy Email (<span data-profile-email></span>)</span><span class="kbd">COPY</span></button>
         <a href="./assets/docs/Le-Minh-Tuong-Frontend-CV.pdf" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="cv resume pdf"><span>Open Resume / CV (PDF)</span><span class="kbd">PDF</span></a>
         <a href="https://lexi-note.vercel.app" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="demo live app"><span>Open LexiNote Live Demo</span><span class="kbd">↗</span></a>
         <a href="https://github.com/MinhTuongLe" target="_blank" rel="noopener noreferrer" class="cmd-item" data-group="actions" data-keywords="code repo profile"><span>Open GitHub Profile</span><span class="kbd">↗</span></a>
@@ -627,7 +677,7 @@
         <button id="lightboxClose" type="button" class="drawer-close">ESC / Close</button>
       </div>
       <div class="lightbox-body">
-        <img id="lightboxImg" src="" alt="Project UI preview" />
+        <img id="lightboxImg" alt="Project UI preview" />
       </div>
     </div>
   </div>

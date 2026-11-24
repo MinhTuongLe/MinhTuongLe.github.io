@@ -265,6 +265,10 @@
   border-radius: 6px;
   padding: 8px 9px;
   background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -316,9 +320,14 @@
 /* Sandbox 2: Kodo BLE Protocol Console */
 .ble-controls {
   display: flex;
-  gap: 7px;
+  gap: 6px;
   flex-wrap: wrap;
   align-items: center;
+}
+
+.ble-controls .btn-sm {
+  font-size: 11.5px;
+  padding: 5px 8px;
 }
 
 .ble-reset-btn {
