@@ -717,14 +717,19 @@
    ========================================================================== */
 .modal-backdrop {
   position: fixed;
-  inset: 0;
+  top: var(--cmd-vt, 0px);
+  left: var(--cmd-vl, 0px);
+  width: var(--cmd-vw, 100%);
+  height: var(--cmd-vh, 100vh);
+  height: var(--cmd-vh, 100dvh);
   background: rgba(15, 23, 42, 0.52);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: none;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 11vh;
+  padding: 11vh 16px 16px;
+  overflow: hidden;
   z-index: 100;
 }
 
@@ -735,24 +740,29 @@
 .cmd-modal {
   width: 100%;
   max-width: 560px;
+  max-height: 100%;
   background: var(--surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  margin: 0 16px;
 }
 
 .cmd-search-wrap {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 16px;
+  padding: 0 12px 0 16px;
   border-bottom: 1px solid var(--border);
   color: var(--ink-muted);
+  flex-shrink: 0;
 }
 
 .cmd-input {
+  flex: 1;
+  min-width: 0;
   width: 100%;
   padding: 14px 0;
   border: none;
@@ -767,10 +777,36 @@
   color: var(--ink-muted);
 }
 
+.cmd-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.cmd-close-btn:hover {
+  background: var(--bg);
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
 .cmd-list {
+  position: relative;
   padding: 8px;
-  max-height: 360px;
+  flex: 1;
+  min-height: 0;
+  max-height: min(360px, 60dvh);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cmd-group-label {
@@ -801,6 +837,15 @@
   transition: background-color 0.1s ease, color 0.1s ease;
 }
 
+.cmd-item > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cmd-item .kbd {
+  flex-shrink: 0;
+}
+
 .cmd-item:hover,
 .cmd-item.is-active {
   background: var(--accent-soft);
@@ -828,9 +873,48 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--ink-muted);
+}
+
+/* Prevent iOS Safari auto-zoom on input focus (< 16px) & constrain mobile popup */
+@media (max-width: 860px), (pointer: coarse) {
+  .cmd-input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-backdrop {
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+  }
+
+  .cmd-search-wrap {
+    padding: 0 10px 0 12px;
+    gap: 8px;
+  }
+
+  .cmd-input {
+    padding: 12px 0;
+  }
+
+  .cmd-list {
+    max-height: none;
+  }
+
+  .cmd-item {
+    padding: 10px;
+    gap: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cmd-footer {
+    display: none;
+  }
 }
 
 /* ==========================================================================

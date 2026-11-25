@@ -13,12 +13,29 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
   const cmdModal = document.getElementById('cmdModal');
   const cmdDialog = cmdModal?.querySelector('.cmd-modal');
   const openCmdBtn = document.getElementById('openCmd');
+  const cmdCloseBtn = document.getElementById('cmdClose');
   const cmdSearch = document.getElementById('cmdSearch');
   const cmdList = document.getElementById('cmdList');
   const cmdCasesSlot = document.getElementById('cmdCasesSlot');
   const cmdEmpty = document.getElementById('cmdEmpty');
 
   if (!cmdModal || !openCmdBtn || !cmdSearch || !cmdList) return;
+
+  const syncVisualViewport = () => {
+    const vv = window.visualViewport;
+    if (!vv || !cmdModal.classList.contains('open')) return;
+    cmdModal.style.setProperty('--cmd-vw', `${Math.round(vv.width)}px`);
+    cmdModal.style.setProperty('--cmd-vh', `${Math.round(vv.height)}px`);
+    cmdModal.style.setProperty('--cmd-vl', `${Math.max(0, Math.round(vv.offsetLeft))}px`);
+    cmdModal.style.setProperty('--cmd-vt', `${Math.max(0, Math.round(vv.offsetTop))}px`);
+  };
+
+  const resetVisualViewport = () => {
+    cmdModal.style.removeProperty('--cmd-vw');
+    cmdModal.style.removeProperty('--cmd-vh');
+    cmdModal.style.removeProperty('--cmd-vl');
+    cmdModal.style.removeProperty('--cmd-vt');
+  };
 
   // Hydrate email label from Single Source of Truth
   cmdList.querySelectorAll('[data-profile-email]').forEach((el) => {
@@ -47,7 +64,7 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
 
   const getVisibleItems = () => allItems.filter((item) => item.style.display !== 'none');
 
-  const updateActiveItem = (nextIndex) => {
+  const updateActiveItem = (nextIndex, { scroll = false } = {}) => {
     const visible = getVisibleItems();
     allItems.forEach((item) => item.classList.remove('is-active'));
     if (visible.length === 0) {
@@ -57,7 +74,15 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
     activeIndex = ((nextIndex % visible.length) + visible.length) % visible.length;
     const activeEl = visible[activeIndex];
     activeEl.classList.add('is-active');
-    activeEl.scrollIntoView({ block: 'nearest' });
+    if (scroll) {
+      const itemTop = activeEl.offsetTop;
+      const itemBottom = itemTop + activeEl.offsetHeight;
+      if (itemTop < cmdList.scrollTop) {
+        cmdList.scrollTop = itemTop - 8;
+      } else if (itemBottom > cmdList.scrollTop + cmdList.clientHeight) {
+        cmdList.scrollTop = itemBottom - cmdList.clientHeight + 8;
+      }
+    }
   };
 
   const syncGroupsVisibility = () => {
@@ -80,6 +105,7 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
     });
     syncGroupsVisibility();
     if (cmdEmpty) cmdEmpty.hidden = visibleCount > 0;
+    cmdList.scrollTop = 0;
     updateActiveItem(0);
   };
 
@@ -95,10 +121,14 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
     if (show) {
       cmdSearch.value = '';
       filterCommands('');
-      cmdSearch.focus();
-    } else if (restoreFocus && lastTriggerEl && typeof lastTriggerEl.focus === 'function') {
-      lastTriggerEl.focus();
-      lastTriggerEl = null;
+      syncVisualViewport();
+      cmdSearch.focus({ preventScroll: true });
+    } else {
+      resetVisualViewport();
+      if (restoreFocus && lastTriggerEl && typeof lastTriggerEl.focus === 'function') {
+        lastTriggerEl.focus({ preventScroll: true });
+        lastTriggerEl = null;
+      }
     }
   };
 
@@ -136,6 +166,11 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
     toggleCmd(true);
   });
 
+  cmdCloseBtn?.addEventListener('click', () => toggleCmd(false));
+
+  window.visualViewport?.addEventListener('resize', syncVisualViewport);
+  window.visualViewport?.addEventListener('scroll', syncVisualViewport);
+
   cmdModal.addEventListener('click', (e) => {
     if (e.target === cmdModal) toggleCmd(false);
   });
@@ -146,10 +181,10 @@ export function initCommandPalette({ openCaseStudy, closeDrawer, closeLightbox }
     const visible = getVisibleItems();
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      updateActiveItem(activeIndex + 1);
+      updateActiveItem(activeIndex + 1, { scroll: true });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      updateActiveItem(activeIndex - 1);
+      updateActiveItem(activeIndex - 1, { scroll: true });
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (visible[activeIndex]) executeItem(visible[activeIndex]);
